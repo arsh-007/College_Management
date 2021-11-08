@@ -1,0 +1,45 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+ <div class="col-sm-10">
+  <button class="tablink" onclick="openPage('Home', this, 'red')">Find Your Quizes</button>
+  <button class="tablink" onclick="openPage('News', this, 'green')" id="defaultOpen">Announcements</button>
+
+  
+  <div id="Home" class="tabcontent">
+  
+
+    <h3>Quizes</h3>
+    {% for q in Quiz %}
+
+      <div style="background-color:blanchedalmond"spacing="20" class="jumbotron">
+        <div class="container">
+          
+          <h3 class="display-4 font-weight-bold">{{q.subcode}}-{{q.branch}}-{{q.year}}year</h3>
+          <h4>Proffessor- {{q.posted_by}}</h4>
+          <p class= "lead">{{q.date}}  {{q.start_time}} to {{q.end_time}}</p>
+          
+          <a href="{{q.quizurl}}" class="btn btn-success">link for the quiz</a>
+          <hr>
+        
+        </div>
+      </div>
+    {% endfor%} 
+  </div>
+    <div id="News" class="tabcontent">
+      <h3>Announcements</h3>
+      
+    </div>   
+  </div>    
+    
+
+  
+  
+  
+  
+  
+ 
+
+
+
+{% endblock content %}
