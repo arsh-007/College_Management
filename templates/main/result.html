@@ -1,0 +1,12 @@
+{% extends 'main/base.html' %} {% load static %} {% block content %}
+
+<h1 class="text-center mb-3">Result</h1>
+
+{% for a in options %}
+<div class="card mb-3">
+  <div class="card-body">
+  
+    <p style="color: black">{{a.choice_text}}-{{a.votes}}%</p>
+  </div>
+</div>
+{% endfor %} {% endblock %}

@@ -14,7 +14,7 @@ body {
   cursor: pointer;
   padding: 14px 16px;
   font-size: 17px;
-  width: 50%;
+  width: 25%;
 }
 
 .tablink:hover {
@@ -29,9 +29,15 @@ body {
   height: 100%;
 }
 
-#Home {
+#c {
   background-color: rgb(75, 74, 74);
 }
-#News {
+#d {
+  background-color: rgb(75, 74, 74);
+}
+#a {
+  background-color: rgb(75, 74, 74);
+}
+#b {
   background-color: rgb(75, 74, 74);
 }

@@ -1,24 +1,24 @@
-{% extends 'main/base.html' %}
+{% extends 'main/base.html' %} {% load static %} {% block content %}
+<div class="col-sm-10">
+  <h3 class="text-white my-5">login page</h3>
+  {% if form.errors %}
+  <p>username or password not correct</p>
+  {% endif %}
 
-{% load static %}
-{% block content %}
- <div class="col-sm-10">
- <h3 class = "text-white my-5">login page </h3>
- <form action="" method = "post" novalidate>
- {% csrf_token %}
-    {% for fm in form %}
-        <div class = "form-group">
-        {{fm.label_tag}} {{fm}} {{fm.errors|striptags}}
-        </div>
+  <form action="" method="post" novalidate>
+    {% csrf_token %} {% for fm in form %}
+    <div class="form-group" style="color: white">
+      {{fm.label_tag}} {{fm}} {{fm.errors|striptags}}
+    </div>
     {% endfor %}
-    <input type="submit" class ="btn btn-primary" value = "Login">
-    {% if form.non_field_errors %}
-        {% for error in form.non_field_errors %}
-        {{error}}
-        {% endfor %}
-    {% endif %}
- </form>
- 
- </div>
+    <input type="submit" class="btn btn-primary" value="Login" />
+  </form>
+</div>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+  {% for msg in messages %}
+  swal("{{ msg }}");
 
+  {% endfor %}
+</script>
 {% endblock content %}

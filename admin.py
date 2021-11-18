@@ -1,22 +1,24 @@
 # Register your models here
 from django.contrib import admin
-from .models import quiz, User, Announcement
+from .models import quiz, Profile, Announcement, Question, Choice,Vote
 # Register your models here.
 
 
-@admin.register(quiz)
-class quizModelAdmin(admin.ModelAdmin):
-    list_display = ['id', 'subcode', 'branch', 'year',
-                    'quizurl', 'date_posted', 'date', 'start_time', 'end_time', 'posted_by']
+class ChoiceInline(admin.TabularInline):
+    model = Choice
+    extra = 4
 
 
-@admin.register(User)
-class UserModelAdmin(admin.ModelAdmin):
-    list_display = ['id', 'first_name', 'last_name', 'username', 'password', 'email',
-                    'branch', 'year', 'is_student', 'is_professor', 'RollNo']
+class QuestionAdmin(admin.ModelAdmin):
+    fieids = {'question_text', 'start_time', 'end_time',
+              'branch', 'year', 'total_votes', 'posted_by'}
+    inlines = [ChoiceInline]
 
 
-@admin.register(Announcement)
-class AnnouncementModelAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'subcode',
-                    'branch', 'year', 'date', 'posted_by']
+admin.site.register(Profile)
+admin.site.register(Question, QuestionAdmin)
+admin.site.register(Vote)
+
+admin.site.register(Choice)
+admin.site.register(quiz)
+admin.site.register(Announcement)

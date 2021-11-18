@@ -1,0 +1,16 @@
+{% extends 'main/base.html' %} {% load static %} {% block content %}
+
+<h1 class="text-center mb-3">Pick Your Choice</h1>
+<form method="POST" action="">
+  {% csrf_token%} {% for a in options %}
+  <div class="card mb-3">
+    <div class="card-body">
+      <input type="radio" name="choice" value="{{a.id}}" />
+        <label for="html" style="color: black">{{a.choice_text}}</label><br />
+    </div>
+  </div>
+  {% endfor %}
+  <input type="submit" value="Submit" class="btn btn-primary" />
+
+</form>
+{% endblock %}

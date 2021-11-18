@@ -1,42 +1,77 @@
-{% extends 'main/base.html' %}
+{% extends 'main/base.html' %} {% load static %} {% block content %}
+<div class="col-sm-10">
+  <h3 class="text-white my-5">Dashboard page</h3>
+  <a href="{% url 'addquiz' %}" class="btn btn-success">Add Quiz</a>
+  <a href="{% url 'addannouncement' %}" class="btn btn-success"
+    >Add Annoncement</a
+  >
+  <a href="{% url 'addpoll' %}" class="btn btn-success">Coduct a Poll</a>
 
-{% load static %}
-{% block content %}
- <div class="col-sm-10">
- <h3 class = "text-white my-5">Dashboard page </h3>
- <a href="{% url 'addquiz' %}" class = "btn btn-success">Add Quiz</a>
- <a href="{% url 'addannouncement' %}" class = "btn btn-success">Add Annoncement</a>
- <h4 class = 'text-center alert alert-info mt-3'>Show quiz information</h4>
- {% if Quizs %}
-    <table class = "table table-hover bg-white">
+  <h4 class="text-center alert alert-info mt-3">Show quiz information</h4>
+  {% if Quizs %}
+  <table class="table table-hover bg-white">
     <thead>
-    <tr class = "text-center">
-    <th scope = "col" style = "width:2%">Subject</th>
-    <th scope = "col" style = "width:28%">Branch</th>
-    <th scope = "col" style = "width:55%">Year</th>
-    <th scope = "col" style = "width:15%">Desc</th>
-    </tr>
+      <tr class="text-center">
+        <th scope="col" style="width: 5%">Subject</th>
+        <th scope="col" style="width: 5%">Branch</th>
+        <th scope="col" style="width: 5%">Year</th>
+        <th scope="col" style="width: 85%">Desc</th>
+      </tr>
     </thead>
     <tbody>
-    {%for quiz in Quizs %}
-    <tr>
-    <th scope = "row">{{quiz.subcode}}</th>
-    <td>{{quiz.branch}}</td>
-    <td>{{quiz.year}}</td>
-    <td>{{quiz.desc}}</td>
-    <td class = "text-center">
-        <a href="{% url 'updatequiz' quiz.id  %}" class = "btn btn-warning btn-sm">Edit</a>
-        <form action="{% url 'delete' quiz.id%}" method="post" class ="d-inline">
+      {% for quiz in Quizs %}
+      <tr>
+        <th scope="row">{{quiz.subcode}}</th>
+        <td>{{quiz.branch}}</td>
+        <td>{{quiz.year}}</td>
+        <td class="text-center">{{quiz.desc}}</td>
+        <td class="text-center">
+          <a
+            href="{% url 'updatequiz' quiz.id  %}"
+            class="btn btn-warning btn-sm"
+            >Edit</a
+          >
+          <form
+            action="{% url 'delete' quiz.id%}"
+            method="post"
+            class="d-inline"
+          >
             {% csrf_token %}
-            <input type="submit" class = "btn btn-danger btn-sm" value = "Delete">
-        </form>
-    </td>
-    
-    </tr>
-    {% endfor %}
+            <input type="submit" class="btn btn-danger btn-sm" value="Delete" />
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
     </tbody>
-    </table>
- {% endif%}
- </div>
-
-{% endblock content %}
+  </table>
+  {% endif%}
+</div>
+<br />
+<br />
+<h4 class="text-center alert alert-info mt-3">Show polls information</h4>
+{% if polls%}
+<table class="table table-hover bg-white">
+  <thead>
+    <tr class="text-center">
+      <th scope="col" style="width: 10%">Title</th>
+      <th scope="col" style="width: 5%">Branch</th>
+      <th scope="col" style="width: 5%">Year</th>
+      <th scope="col" style="width: 80%">Question</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in polls %}
+    <tr>
+      <th scope="row">{{p.title}}</th>
+      <td>{{p.branch}}</td>
+      <td>{{p.year}}</td>
+      <td class="text-center">{{p.question_text}}</td>
+      <td class="text-center">
+        <a href="{% url 'addchoice' p.id  %}" class="btn btn-warning btn-sm"
+          >Addchoices</a
+        >
+      </td>
+    </tr>
+    {% endfor %} {% endif %} {% endblock content %}
+  </tbody>
+</table>

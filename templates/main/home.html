@@ -1,45 +1,121 @@
-{% extends 'main/base.html' %}
-{% load static %}
-{% block content %}
- <div class="col-sm-10">
-  <button class="tablink" onclick="openPage('Home', this, 'red')">Find Your Quizes</button>
-  <button class="tablink" onclick="openPage('News', this, 'green')" id="defaultOpen">Announcements</button>
+{% extends 'main/base.html' %} {% load static %} {% block content %}
+<div class="col-sm-10">
+  <button class="tablink" onclick="openPage('c', this, 'red')" id="defaultOpen">
+    Running Quizzes
+  </button>
+  <button class="tablink" onclick="openPage('d', this, 'green')">
+    Announcements
+  </button>
+  <button class="tablink" onclick="openPage('a', this, 'green')">
+    Past Quizzes
+  </button>
+  <button class="tablink" onclick="openPage('b', this, 'green')">
+    Upcoming Quizzes
+  </button>
 
-  
-  <div id="Home" class="tabcontent">
-  
-
+  <div id="c" class="tabcontent">
     <h3>Quizes</h3>
-    {% for q in Quiz %}
+    {% for q in Qpresent %}
 
-      <div style="background-color:blanchedalmond"spacing="20" class="jumbotron">
-        <div class="container">
-          
-          <h3 class="display-4 font-weight-bold">{{q.subcode}}-{{q.branch}}-{{q.year}}year</h3>
-          <h4>Proffessor- {{q.posted_by}}</h4>
-          <p class= "lead">{{q.date}}  {{q.start_time}} to {{q.end_time}}</p>
-          
-          <a href="{{q.quizurl}}" class="btn btn-success">link for the quiz</a>
-          <hr>
-        
-        </div>
+    <div
+      style="background-color: blanchedalmond"
+      spacing="20"
+      class="jumbotron"
+    >
+      <div class="container">
+        <h3 class="display-4 font-weight-bold" style="color: black">
+          {{q.subcode}}
+        </h3>
+        <h4 style="color: black">Proffessor- {{q.posted_by}}</h4>
+        <p class="lead" style="color: black">
+          {{q.start_time}} to {{q.end_time}}
+        </p>
+        <p style="color: black">{{q.desc}}</p>
+        <a href="{{q.quizurl}}" class="btn btn-success" style="color: black"
+          >link for the quiz</a
+        >
+        <hr />
       </div>
-    {% endfor%} 
+    </div>
+    {% endfor%}
   </div>
-    <div id="News" class="tabcontent">
-      <h3>Announcements</h3>
-      
-    </div>   
-  </div>    
-    
+  <div id="d" class="tabcontent">
+    <h3>Announcements</h3>
+    {% for q in A %}
 
-  
-  
-  
-  
-  
- 
+    <div
+      style="background-color: blanchedalmond"
+      spacing="20"
+      class="jumbotron"
+    >
+      <div class="container">
+        <h3 class="display-4 font-weight-bold" style="color: black">
+          {{q.Title}}
+        </h3>
+        <h4 style="color: black">Proffessor- {{q.posted_by}}</h4>
+        <p class="lead" style="color: black">{{q.branch}}-{{q.year}}</p>
+        <p style="color: black">{{q.desc}}</p>
 
+        <hr />
+      </div>
+    </div>
+    {% endfor%}
+  </div>
+  <div id="a" class="tabcontent">
+    <h3>Past Quizes</h3>
+    {% for q in Qpast %}
 
+    <div
+      style="background-color: blanchedalmond"
+      spacing="20"
+      class="jumbotron"
+    >
+      <div class="container">
+        <h3 class="display-4 font-weight-bold" style="color: black">
+          {{q.subcode}}
+        </h3>
+        <h4 style="color: black">Proffessor- {{q.posted_by}}</h4>
+        <p class="lead" style="color: black">
+          {{q.start_time}} to {{q.end_time}}
+        </p>
+        <p style="color: black">{{q.desc}}</p>
+        <a href="{{q.quizurl}}" class="btn btn-success" style="color: black"
+          >link for the quiz</a
+        >
+        <hr />
+      </div>
+    </div>
+    {% endfor%}
+  </div>
+  <div id="b" class="tabcontent">
+    <h3>Upcoming Quizes</h3>
+    {% for q in Qfuture %}
 
+    <div
+      style="background-color: blanchedalmond"
+      spacing="20"
+      class="jumbotron"
+    >
+      <div class="container">
+        <h3 class="display-4 font-weight-bold" style="color: black"></h3>
+        <h3 style="color: black">{{q.subcode}}</h3>
+        <h4 style="color: black">Proffessor- {{q.posted_by}}</h4>
+        <p class="lead" style="color: black">
+          {{q.start_time}} to {{q.end_time}}
+        </p>
+        <p style="color: black">{{q.desc}}</p>
+
+        <hr />
+      </div>
+    </div>
+    {% endfor%}
+  </div>
+</div>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+  {% for msg in messages %}
+  swal("{{ msg }}");
+
+  {% endfor %}
+</script>
 {% endblock content %}
